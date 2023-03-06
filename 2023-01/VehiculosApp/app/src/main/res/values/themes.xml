@@ -1,9 +1,8 @@
 
 <resources>
     <style name="Theme.VehiculosApp" parent="Theme.Material3.Light.NoActionBar">
-        <item name="android:windowActivityTransitions">true</item>
-        <!-- specify enter and exit transitions -->
 
+        <item name="android:windowActivityTransitions">true</item>
 
         <item name="colorPrimary">@color/md_theme_light_primary</item>
         <item name="colorOnPrimary">@color/md_theme_light_onPrimary</item>

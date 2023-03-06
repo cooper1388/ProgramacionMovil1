@@ -1,4 +1,4 @@
-package hn.uth.vehiculosapp;
+package hn.uth.vehiculosapp.listadovehiculos.ui.adapter;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
+import hn.uth.vehiculosapp.OnItemClickListener;
+import hn.uth.vehiculosapp.listadovehiculos.entity.Vehiculo;
 import hn.uth.vehiculosapp.databinding.VehiculoItemBinding;
 
 public class VehiculosAdapter extends RecyclerView.Adapter<VehiculosAdapter.ViewHolder> {

@@ -1,4 +1,6 @@
-package hn.uth.vehiculosapp;
+package hn.uth.vehiculosapp.listadovehiculos.ui;
+
+import static android.app.Activity.RESULT_OK;
 
 import android.app.ActivityOptions;
 import android.content.Intent;
@@ -8,28 +10,35 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import java.util.ArrayList;
-import java.util.List;
 
+import hn.uth.vehiculosapp.OnItemClickListener;
+import hn.uth.vehiculosapp.listadovehiculos.entity.Vehiculo;
+import hn.uth.vehiculosapp.listadovehiculos.ui.adapter.VehiculosAdapter;
+import hn.uth.vehiculosapp.VehiculosApp;
+import hn.uth.vehiculosapp.crearvehiculos.ui.CrearVehiculoActivity;
 import hn.uth.vehiculosapp.databinding.FragmentFirstBinding;
 
-public class FirstFragment extends Fragment implements OnItemClickListener<Vehiculo>{
+public class FirstFragment extends Fragment implements OnItemClickListener<Vehiculo> {
 
     private FragmentFirstBinding binding;
 
     private VehiculosAdapter adaptador;
 
     private VehiculosApp app;
+    private VehiculoViewModel vehiculosViewModel;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         binding = FragmentFirstBinding.inflate(inflater, container, false);
         app = VehiculosApp.getInstance();
+        vehiculosViewModel = new ViewModelProvider(this).get(VehiculoViewModel.class);
 
         /*app.getDataset().add(new Vehiculo("Nissan", "Sentra", 2020));
         app.getDataset().add(new Vehiculo("Honda", "Civic", 2015));
@@ -38,9 +47,13 @@ public class FirstFragment extends Fragment implements OnItemClickListener<Vehic
         app.getDataset().add(new Vehiculo("BMW", "CX-7", 2019));
         app.getDataset().add(new Vehiculo("Tesla", "Model M", 2023));*/
 
-        validarDataset();
+        adaptador = new VehiculosAdapter(new ArrayList<>(), this);
 
-        adaptador = new VehiculosAdapter(app.getDataset(), this);
+        //CONSULTA A BASE DE DATOS MEDIANTE BACKGRUOND THREAD
+        vehiculosViewModel.getVehiculosDataset().observe(this, vehiculos -> {
+            adaptador.setItems(vehiculos);
+            validarDataset();
+        });
 
         setupReciclerView();
 
@@ -48,7 +61,7 @@ public class FirstFragment extends Fragment implements OnItemClickListener<Vehic
     }
 
     private void validarDataset() {
-        if(app.getDataset().size() == 0){
+        if(adaptador.getItemCount() == 0){
             binding.tvWarning.setVisibility(View.VISIBLE);
             binding.ivWarning.setVisibility(View.VISIBLE);
             binding.rvVehiculos.setVisibility(View.INVISIBLE);
@@ -66,10 +79,6 @@ public class FirstFragment extends Fragment implements OnItemClickListener<Vehic
     @Override
     public void onResume() {
         super.onResume();
-        if(this.adaptador != null && app != null && this.adaptador.getItemCount() <= app.getDataset().size()){
-            this.adaptador.setItems(app.getDataset());
-            validarDataset();
-        }
     }
 
     private void setupReciclerView(){
@@ -91,5 +100,36 @@ public class FirstFragment extends Fragment implements OnItemClickListener<Vehic
         intent.putExtra("VEHICULO_MODELO", data.getModelo());
         intent.putExtra("VEHICULO_ANIO", data.getAnio());
         startActivityForResult(intent, 6, ActivityOptions.makeSceneTransitionAnimation(this.getActivity()).toBundle());
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if(requestCode == 6){
+            //EDICIÓN DE UN VEHICULO EXISTENTE
+            if(resultCode == RESULT_OK){
+                String marca = data.getStringExtra("MARCA");//EL MODELO NUEVO
+                String modelo = data.getStringExtra("MODELO");
+                String anio = data.getStringExtra("ANIO");
+
+                String marcaOriginal = data.getStringExtra("MARCA_O");//EL MODELO ORIGNAL
+                String modeloOriginal = data.getStringExtra("MODELO_O");
+                String anioOriginal = data.getStringExtra("ANIO_O");
+
+                int anioInt = Integer.parseInt(anioOriginal);
+
+                /*for(int i = 0; i<app.getDataset().size(); i++){
+                    if(app.getDataset().get(i).getAnio() == anioInt && app.getDataset().get(i).getMarca().equalsIgnoreCase(marcaOriginal) && app.getDataset().get(i).getModelo().equalsIgnoreCase(modeloOriginal)){
+                        app.getDataset().get(i).setModelo(modelo);
+                        app.getDataset().get(i).setMarca(marca);
+                        app.getDataset().get(i).setAnio(Integer.parseInt(anio));
+                        break;
+                    }
+                }*/
+
+                //adaptador.notifyDataSetChanged();
+            }
+        }
+
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }

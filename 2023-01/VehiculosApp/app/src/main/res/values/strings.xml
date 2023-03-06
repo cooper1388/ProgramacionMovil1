@@ -15,6 +15,7 @@
     <string name="btn_guardar_vehiculo">Guardar Vehiculo</string>
     <string name="btn_crear_vehiculo">Crear Vehiculo</string>
     <string name="mensaje_creacion_vehiculo">Vehiculo %1$s Creado</string>
+    <string name="mensaje_mod_vehiculo">Vehiculo %1$s modificado</string>
     <string name="lbl_image_car">Imagen de un automovil</string>
     <string name="lbl_car_image">Car Example preview</string>
     <string name="lbl_tv_warning">No hay vehiculos creados</string>

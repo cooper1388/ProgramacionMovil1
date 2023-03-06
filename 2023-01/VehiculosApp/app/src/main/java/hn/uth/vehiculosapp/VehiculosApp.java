@@ -2,12 +2,16 @@ package hn.uth.vehiculosapp;
 
 import android.app.Application;
 
+import androidx.annotation.NonNull;
+import androidx.room.RoomDatabase;
+import androidx.sqlite.db.SupportSQLiteDatabase;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class VehiculosApp extends Application {
+import hn.uth.vehiculosapp.listadovehiculos.entity.Vehiculo;
 
-    private List<Vehiculo> dataset;
+public class VehiculosApp extends Application {
 
     private static VehiculosApp instance;
 
@@ -22,10 +26,4 @@ public class VehiculosApp extends Application {
         return instance;
     }
 
-    public List<Vehiculo> getDataset(){
-        if(this.dataset == null){
-            this.dataset = new ArrayList<>();
-        }
-        return this.dataset;
-    }
 }
