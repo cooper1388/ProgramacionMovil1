@@ -40,13 +40,6 @@ public class FirstFragment extends Fragment implements OnItemClickListener<Vehic
         app = VehiculosApp.getInstance();
         vehiculosViewModel = new ViewModelProvider(this).get(VehiculoViewModel.class);
 
-        /*app.getDataset().add(new Vehiculo("Nissan", "Sentra", 2020));
-        app.getDataset().add(new Vehiculo("Honda", "Civic", 2015));
-        app.getDataset().add(new Vehiculo("Ford", "Escape", 2012));
-        app.getDataset().add(new Vehiculo("Mini", "Bloom", 2016));
-        app.getDataset().add(new Vehiculo("BMW", "CX-7", 2019));
-        app.getDataset().add(new Vehiculo("Tesla", "Model M", 2023));*/
-
         adaptador = new VehiculosAdapter(new ArrayList<>(), this);
 
         //CONSULTA A BASE DE DATOS MEDIANTE BACKGRUOND THREAD
@@ -96,6 +89,7 @@ public class FirstFragment extends Fragment implements OnItemClickListener<Vehic
     @Override
     public void onItemClick(Vehiculo data, int type) {
         Intent intent = new Intent(this.getContext(), CrearVehiculoActivity.class);
+        intent.putExtra("VEHICULO_ID", data.getIdVehiculo());
         intent.putExtra("VEHICULO_MARCA", data.getMarca());
         intent.putExtra("VEHICULO_MODELO", data.getModelo());
         intent.putExtra("VEHICULO_ANIO", data.getAnio());
@@ -107,24 +101,14 @@ public class FirstFragment extends Fragment implements OnItemClickListener<Vehic
         if(requestCode == 6){
             //EDICIÓN DE UN VEHICULO EXISTENTE
             if(resultCode == RESULT_OK){
+                int id = data.getIntExtra("ID", 0);//EL ID DEL VEHICULO SELECCIONADO
                 String marca = data.getStringExtra("MARCA");//EL MODELO NUEVO
                 String modelo = data.getStringExtra("MODELO");
                 String anio = data.getStringExtra("ANIO");
 
-                String marcaOriginal = data.getStringExtra("MARCA_O");//EL MODELO ORIGNAL
-                String modeloOriginal = data.getStringExtra("MODELO_O");
-                String anioOriginal = data.getStringExtra("ANIO_O");
-
-                int anioInt = Integer.parseInt(anioOriginal);
-
-                /*for(int i = 0; i<app.getDataset().size(); i++){
-                    if(app.getDataset().get(i).getAnio() == anioInt && app.getDataset().get(i).getMarca().equalsIgnoreCase(marcaOriginal) && app.getDataset().get(i).getModelo().equalsIgnoreCase(modeloOriginal)){
-                        app.getDataset().get(i).setModelo(modelo);
-                        app.getDataset().get(i).setMarca(marca);
-                        app.getDataset().get(i).setAnio(Integer.parseInt(anio));
-                        break;
-                    }
-                }*/
+                Vehiculo actualizar = new Vehiculo(marca, modelo, Integer.parseInt(anio));
+                actualizar.setIdVehiculo(id);
+                vehiculosViewModel.update(actualizar);
 
                 //adaptador.notifyDataSetChanged();
             }

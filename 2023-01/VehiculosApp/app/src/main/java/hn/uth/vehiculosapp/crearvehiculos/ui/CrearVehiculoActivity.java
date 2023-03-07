@@ -12,9 +12,7 @@ import hn.uth.vehiculosapp.databinding.ActivityCrearVehiculoBinding;
 public class CrearVehiculoActivity extends AppCompatActivity {
 
     private ActivityCrearVehiculoBinding binding;
-    private String marcaOriginal;
-    private String modeloOriginal;
-    private String anioOriginal;
+    private int idVehiculo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,13 +23,11 @@ public class CrearVehiculoActivity extends AppCompatActivity {
 
         binding.btnGuardar.setOnClickListener(v-> {
             Intent resultado = new Intent();
+            resultado.putExtra("ID", idVehiculo);
             resultado.putExtra("MARCA",binding.tilMarca.getEditText().getText().toString());
             resultado.putExtra("MODELO",binding.tilModelo.getEditText().getText().toString());
             resultado.putExtra("ANIO",binding.tilAnio.getEditText().getText().toString());
 
-            resultado.putExtra("MARCA_O", marcaOriginal);
-            resultado.putExtra("MODELO_O", modeloOriginal);
-            resultado.putExtra("ANIO_O", anioOriginal);
             setResult(Activity.RESULT_OK, resultado);
             finish();
         });
@@ -41,12 +37,11 @@ public class CrearVehiculoActivity extends AppCompatActivity {
 
     private void obtenerDatosIntent(Intent intent) {
         String marca = intent.getStringExtra("VEHICULO_MARCA");
+
         if(marca != null){
             String modelo = intent.getStringExtra("VEHICULO_MODELO");
             int anio = intent.getIntExtra("VEHICULO_ANIO", 0);
-            marcaOriginal = marca+"";
-            modeloOriginal = modelo+"";
-            anioOriginal = anio+"";
+            idVehiculo = intent.getIntExtra("VEHICULO_ID", 0);
 
             binding.tilMarca.getEditText().setText(marca);
             binding.tilModelo.getEditText().setText(modelo);

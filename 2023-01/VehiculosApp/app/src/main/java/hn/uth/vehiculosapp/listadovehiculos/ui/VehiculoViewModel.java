@@ -29,4 +29,8 @@ public class VehiculoViewModel extends AndroidViewModel {
     public void insert(Vehiculo nuevo){
         repository.insert(nuevo);
     }
+
+    public void update(Vehiculo actualizar){
+        repository.update(actualizar);
+    }
 }

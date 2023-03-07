@@ -11,7 +11,6 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import hn.uth.vehiculosapp.VehiculosApp;
 import hn.uth.vehiculosapp.listadovehiculos.entity.Vehiculo;
 import hn.uth.vehiculosapp.listadovehiculos.entity.VehiculoDao;
 
@@ -36,7 +35,7 @@ public abstract class VehiculosDatabase extends RoomDatabase {
                                 VehiculoDao dao = INSTANCE.vehiculoDao();
                                 dao.deleteAll();
 
-                                Vehiculo nuevo = new Vehiculo("Tesla", "CM", 2020);
+                                Vehiculo nuevo = new Vehiculo("Tesla", "CM", 2023);
                                 dao.insert(nuevo);
                             });
 

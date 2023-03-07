@@ -28,4 +28,10 @@ public class VehiculoRepository {
             vehiculoDao.insert(nuevo);
         });
     }
+
+    public void update(Vehiculo actualizar){
+        VehiculosDatabase.databaseWriteExecutor.execute(() ->{
+            vehiculoDao.update(actualizar);
+        });
+    }
 }
