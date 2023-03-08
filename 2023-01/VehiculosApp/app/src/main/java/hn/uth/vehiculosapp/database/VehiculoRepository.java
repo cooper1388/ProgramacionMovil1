@@ -34,4 +34,10 @@ public class VehiculoRepository {
             vehiculoDao.update(actualizar);
         });
     }
+
+    public void delete(Vehiculo eliminar){
+        VehiculosDatabase.databaseWriteExecutor.execute(() ->{
+            vehiculoDao.delete(eliminar);
+        });
+    }
 }
