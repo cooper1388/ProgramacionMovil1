@@ -40,4 +40,10 @@ public class VehiculoRepository {
             vehiculoDao.delete(eliminar);
         });
     }
+
+    public void deleteAll(){
+        VehiculosDatabase.databaseWriteExecutor.execute(() ->{
+            vehiculoDao.deleteAll();
+        });
+    }
 }

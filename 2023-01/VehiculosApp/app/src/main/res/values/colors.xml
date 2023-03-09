@@ -31,7 +31,7 @@
     <color name="md_theme_light_surfaceTint">#006A65</color>
     <color name="md_theme_light_outlineVariant">#BEC9C7</color>
     <color name="md_theme_light_scrim">#000000</color>
-    <color name="md_theme_dark_primary">#4FDAD2</color>
+    <color name="md_theme_dark_primary">#3B9A95</color>
     <color name="md_theme_dark_onPrimary">#003734</color>
     <color name="md_theme_dark_primaryContainer">#00504C</color>
     <color name="md_theme_dark_onPrimaryContainer">#4AA59F</color>

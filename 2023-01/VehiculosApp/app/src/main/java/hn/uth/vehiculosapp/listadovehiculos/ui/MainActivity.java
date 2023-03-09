@@ -1,6 +1,8 @@
 package hn.uth.vehiculosapp.listadovehiculos.ui;
 
 import android.app.ActivityOptions;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -63,9 +65,6 @@ public class MainActivity extends AppCompatActivity {
         getWindow().setExitTransition(new Explode());
 
     }
-
-
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if(requestCode == 7){
@@ -76,37 +75,10 @@ public class MainActivity extends AppCompatActivity {
                 anio = data.getStringExtra("ANIO");
 
                 vehiculosViewModel.insert(new Vehiculo(marca, modelo, Integer.parseInt(anio)));
-               // app.getDataset().add();
 
                 String datosVehiculo = marca + " "+modelo + " ("+anio+")";
 
                 Snackbar.make(binding.clMainLayout, getString(R.string.mensaje_creacion_vehiculo, datosVehiculo), Snackbar.LENGTH_LONG).show();
-            }
-        }else if(requestCode == 6){
-            //EDICIÓN DE UN VEHICULO EXISTENTE
-            if(resultCode == RESULT_OK){
-                marca = data.getStringExtra("MARCA");//EL MODELO NUEVO
-                modelo = data.getStringExtra("MODELO");
-                anio = data.getStringExtra("ANIO");
-
-                String marcaOriginal = data.getStringExtra("MARCA_O");//EL MODELO ORIGNAL
-                String modeloOriginal = data.getStringExtra("MODELO_O");
-                String anioOriginal = data.getStringExtra("ANIO_O");
-
-                int anioInt = Integer.parseInt(anioOriginal);
-
-                /*for(int i = 0; i<app.getDataset().size(); i++){
-                    if(app.getDataset().get(i).getAnio() == anioInt && app.getDataset().get(i).getMarca().equalsIgnoreCase(marcaOriginal) && app.getDataset().get(i).getModelo().equalsIgnoreCase(modeloOriginal)){
-                        app.getDataset().get(i).setModelo(modelo);
-                        app.getDataset().get(i).setMarca(marca);
-                        app.getDataset().get(i).setAnio(anioInt);
-                        break;
-                    }
-                }*/
-
-                String datosVehiculo = marca + " "+modelo + " ("+anio+")";
-
-                Snackbar.make(binding.clMainLayout, getString(R.string.mensaje_mod_vehiculo, datosVehiculo), Snackbar.LENGTH_LONG).show();
             }
         }
 
@@ -128,7 +100,33 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_delete_all) {
+
+
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+            // 2. Chain together various setter methods to set the dialog characteristics
+            builder.setMessage(R.string.delete_dialog_message)
+                    .setTitle(R.string.delete_dialog_title);
+
+            builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    vehiculosViewModel.deleteAll();
+                    Snackbar.make(binding.clMainLayout, getString(R.string.mensaje_eliminar_todo), Snackbar.LENGTH_LONG).show();
+                }
+            });
+            builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+
+                }
+            });
+
+            // 3. Get the <code><a href="/reference/android/app/AlertDialog.html">AlertDialog</a></code> from <code><a href="/reference/android/app/AlertDialog.Builder.html#create()">create()</a></code>
+            AlertDialog dialog = builder.create();
+            dialog.show();
+
+
             return true;
         }
 

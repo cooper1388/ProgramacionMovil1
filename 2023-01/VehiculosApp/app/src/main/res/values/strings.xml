@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">VehiculosApp</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_delete_all">Borrar todo</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">Vehiculos</string>
     <string name="second_fragment_label">Second Fragment</string>
@@ -16,6 +16,7 @@
     <string name="btn_crear_vehiculo">Crear Vehiculo</string>
     <string name="mensaje_creacion_vehiculo">Vehiculo %1$s Creado</string>
     <string name="mensaje_eliminacion_vehiculo">Vehiculo Borrado</string>
+    <string name="mensaje_eliminar_todo">Todos los vehiculos han sido eliminados</string>
     <string name="mensaje_mod_vehiculo">Vehiculo %1$s modificado</string>
     <string name="lbl_image_car">Imagen de un automovil</string>
     <string name="lbl_car_image">Car Example preview</string>
@@ -24,4 +25,8 @@
     <string name="lbl_menu_eliminar_vehiculo">Eliminar Vehiculo</string>
     <string name="title_create_vehicle">Crear Vehiculo</string>
     <string name="title_update_vehicle">Actualizar Vehiculo</string>
+    <string name="delete_dialog_title">Confirmar Acción</string>
+    <string name="delete_dialog_message">¿Desea eliminar todos los vehiculos?</string>
+    <string name="ok">Si</string>
+    <string name="cancel">Cancelar</string>
 </resources>

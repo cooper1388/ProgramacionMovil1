@@ -32,6 +32,7 @@ public class CrearVehiculoActivity extends AppCompatActivity {
 
         binding = ActivityCrearVehiculoBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        obtenerDatosIntent(getIntent());
         setSupportActionBar(binding.toolbar);
 
 
@@ -46,7 +47,7 @@ public class CrearVehiculoActivity extends AppCompatActivity {
             finish();
         });
 
-        obtenerDatosIntent(getIntent());
+
     }
 
     private void obtenerDatosIntent(Intent intent) {
@@ -94,6 +95,8 @@ public class CrearVehiculoActivity extends AppCompatActivity {
             vehiculosViewModel.delete(vehiculoEliminar);
 
             Snackbar.make(binding.clCrearVehiculo, getString(R.string.mensaje_eliminacion_vehiculo), Snackbar.LENGTH_LONG).show();
+
+            finish();
         }
 
         return super.onOptionsItemSelected(item);
