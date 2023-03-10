@@ -102,12 +102,10 @@ public class MainActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_delete_all) {
 
-
-
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
             // 2. Chain together various setter methods to set the dialog characteristics
-            builder.setMessage(R.string.delete_dialog_message)
+            builder.setMessage(R.string.delete_all_dialog_message)
                     .setTitle(R.string.delete_dialog_title);
 
             builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {

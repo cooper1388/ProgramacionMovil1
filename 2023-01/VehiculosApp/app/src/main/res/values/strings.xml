@@ -26,7 +26,8 @@
     <string name="title_create_vehicle">Crear Vehiculo</string>
     <string name="title_update_vehicle">Actualizar Vehiculo</string>
     <string name="delete_dialog_title">Confirmar Acción</string>
-    <string name="delete_dialog_message">¿Desea eliminar todos los vehiculos?</string>
+    <string name="delete_all_dialog_message">¿Desea eliminar todos los vehiculos?</string>
+    <string name="delete_dialog_message">¿Desea eliminar el vehiculos seleccionado?</string>
     <string name="ok">Si</string>
     <string name="cancel">Cancelar</string>
 </resources>

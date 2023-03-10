@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -92,11 +94,30 @@ public class CrearVehiculoActivity extends AppCompatActivity {
                     0);
             vehiculoEliminar.setIdVehiculo(idVehiculo);
 
-            vehiculosViewModel.delete(vehiculoEliminar);
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-            Snackbar.make(binding.clCrearVehiculo, getString(R.string.mensaje_eliminacion_vehiculo), Snackbar.LENGTH_LONG).show();
+            // 2. Chain together various setter methods to set the dialog characteristics
+            builder.setMessage(R.string.delete_dialog_message)
+                    .setTitle(R.string.delete_dialog_title);
 
-            finish();
+            builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    vehiculosViewModel.delete(vehiculoEliminar);
+
+                    Snackbar.make(binding.clCrearVehiculo, getString(R.string.mensaje_eliminacion_vehiculo), Snackbar.LENGTH_LONG).show();
+
+                    finish();
+                }
+            });
+            builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+
+                }
+            });
+
+            // 3. Get the <code><a href="/reference/android/app/AlertDialog.html">AlertDialog</a></code> from <code><a href="/reference/android/app/AlertDialog.Builder.html#create()">create()</a></code>
+            AlertDialog dialog = builder.create();
+            dialog.show();
         }
 
         return super.onOptionsItemSelected(item);
