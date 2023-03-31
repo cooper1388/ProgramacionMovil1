@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Dryclean App</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Lavanderia Toncontín</string>
+    <string name="nav_header_subtitle">ventas@lavanderiatoncontin.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Configuración</string>
+
+    <string name="menu_home">Productos</string>
+    <string name="menu_delivery">Delivery</string>
+    <string name="menu_orders">Ordenes</string>
+    <string name="btn_buscar">Buscar</string>
+    <string name="btnBuscar">Buscar</string>
+    <string name="hint_texto_buscar">Término de búsqueda</string>
+</resources>

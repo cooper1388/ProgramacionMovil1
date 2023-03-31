@@ -23,8 +23,10 @@
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_slideshow" />
     <activity
-        android:id="@+id/clienteActivity"
+        android:id="@+id/nav_cliente"
         android:name="hn.uth.clienteskb.clientes.ClienteActivity"
         android:label="activity_cliente"
         tools:layout="@layout/activity_cliente" />
+
+
 </navigation>
