@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">ShareMyPosition</string>
+    <string name="btn_share_location">Compartir ubicación</string>
+    <string name="ib_ask_location_description">Image Ask for My Location</string>
+    <string name="btn_open_map">Abrir Mapa</string>
+</resources>
